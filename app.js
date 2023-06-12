@@ -18,6 +18,14 @@ const Winner = document.querySelector(".winner")
 let winnerDeclared = false;
 
 function handleClick(e) {
+    let td = e.target;
+    let index = td.getAttribute("index");
+    if (td.innerHTML == "") {
+        td.innerHTML = currentPlayer;
+        gameState[index] = td.innerHTML;
+        changePlayer();
+    }
+
 }
 
 
