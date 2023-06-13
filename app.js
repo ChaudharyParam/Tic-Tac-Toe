@@ -23,20 +23,22 @@ function handleClick(e) {
   if (td.innerHTML == "") {
     td.innerHTML = currentPlayer;
     gameState[index] = td.innerHTML;
-    checkDraw()
     checkWinner();
+    checkDraw()
 
     changePlayer();
   }
 }
 
-function clearTable() {
+function reset() {
   cells.forEach((td) => {
     td.innerHTML = "";
   });
 
   const clearState = gameState.map((cell, index) => (cell[index] = ""));
   gameState = clearState;
+  currentPlayer = "X"
+  winnerDeclared = false
 }
 
 //changePlayer
@@ -59,11 +61,11 @@ function checkWinner() {
       gameState[c] === currentPlayer
     ) {
       winnerDeclared = true;
-      clearTable()
 
       const winner = `Winner is ${currentPlayer}`;
 
       Winner.innerHTML = winner;
+      reset()
     }
   }
 }
@@ -74,7 +76,7 @@ function checkDraw() {
   for (let i = 0; i < gameState.length - 1; i++) {
     if (!gameState.includes("") && winnerDeclared === false) {
       Winner.innerHTML = "Game is Draw";
-      clearTable()
+      reset()
     }
   }
 }
